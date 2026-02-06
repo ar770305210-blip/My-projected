@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <p>Nothing to see here...</p>
+  <!-- Project -->
+  <script src="main.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستەمی بازرگانی کوردی</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --sale-color: #27ae60;
+            --buy-color: #8e44ad;
+            --stock-color: #2980b9;
+            --return-color: #e67e22;
+            --bg: #f8f9fa;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: var(--bg); color: #333; }
+        header { background: var(--primary); color: white; padding: 15px; text-align: center; font-size: 1.2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        .container { padding: 15px; }
+
+        /* لاپەڕەکان */
+        .page { display: none; animation: slideIn 0.3s ease-out; }
+        .active { display: block; }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* مێنۆی سەرەکی */
+        .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .menu-item { 
+            background: white; padding: 25px 10px; border-radius: 15px; text-align: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s;
+            font-weight: bold; font-size: 1.1rem; border-bottom: 6px solid #ddd;
+        }
+        .menu-item:active { transform: scale(0.95); }
+
+        /* فۆرم و دیزاین */
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input { 
+            width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; 
+            border-radius: 8px; box-sizing: border-box; font-size: 1rem; 
+        }
+        button { 
+            width: 100%; padding: 15px; margin-top: 20px; border: none; 
+            border-radius: 8px; font-size: 1rem; font-weight: bold; color: white; cursor: pointer;
+        }
+        .btn-back { background: #666 !important; margin-bottom: 15px; padding: 10px; }
+
+        /* خشتەی کۆگا */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+
+<header>بەڕێوەبردنی بازرگانی</header>
+
+<div class="container">
+    
+    <div id="home" class="page active">
+        <div class="grid-menu">
+            <div class="menu-item" onclick="showPage('salePage')" style="border-color: var(--sale-color);">🛒 فرۆشتن</div>
+            <div class="menu-item" onclick="showPage('buyPage')" style="border-color: var(--buy-color);">💰 کڕین</div>
+            <div class="menu-item" onclick="showPage('stockPage')" style="border-color: var(--stock-color);">📦 کۆگا</div>
+            <div class="menu-item" onclick="showPage('returnPage')" style="border-color: var(--return-color);">🔄 گەڕانەوە</div>
+        </div>
+    </div>
+
+    <div id="salePage" class="page">
+        <button class="btn-back" onclick="showPage('home')">⬅ گەڕانەوە</button>
+        <div class="card">
+            <h3 style="color: var(--sale-color);">پسوڵەی فرۆشتن</h3>
+            <label>ناوی کاڵا:</label>
+            <input type="text" id="s_name" placeholder="ناوی مادە">
+            <label>بڕ:</label>
+            <input type="number" id="s_qty" placeholder="0">
+            <button style="background: var(--sale-color);" onclick="action('فرۆشتن', 's_name', 's_qty')">تۆمارکردنی فرۆشتن</button>
+        </div>
+    </div>
+
+    <div id="buyPage" class="page">
+        <button class="btn-back" onclick="showPage('home')">⬅ گەڕانەوە</button>
+        <div class="card">
+            <h3 style="color: var(--buy-color);">داخڵکردنی کڕین</h3>
+            <label>ناوی کاڵا:</label>
+            <input type="text" id="b_name" placeholder="ناوی مادەی کڕدراو">
+            <label>بڕ:</label>
+            <input type="number" id="b_qty" placeholder="0">
+            <button style="background: var(--buy-color);" onclick="action('کڕین', 'b_name', 'b_qty')">تۆمارکردنی کڕین</button>
+        </div>
+    </div>
+
+    <div id="stockPage" class="page">
+        <button class="btn-back" onclick="showPage('home')">⬅ گەڕانەوە</button>
+        <div class="card">
+            <h3 style="color: var(--stock-color);">جەردی کۆگا</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>کاڵا</th>
+                        <th>بڕی ماوە</th>
+                    </tr>
+                </thead>
+                <tbody id="stockBody">
+                    <tr><td>ئایفۆن</td><td>١٥</td></tr>
+                    <tr><td>لاپتۆپ</td><td>٨</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="returnPage" class="page">
+        <button class="btn-back" onclick="showPage('home')">⬅ گەڕانەوە</button>
+        <div class="card">
+            <h3 style="color: var(--return-color);">گەڕانەوەی مادە</h3>
+            <label>ناوی کاڵا:</label>
+            <input type="text" id="r_name" placeholder="ناوی ئەو مادەیەی گەڕاوەتەوە">
+            <label>هۆکاری گەڕانەوە:</label>
+            <input type="text" placeholder="بۆ نموونە: شکاوی">
+            <button style="background: var(--return-color);" onclick="action('گەڕانەوە', 'r_name', 'r_qty')">تۆمارکردنی گەڕانەوە</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // فەنکشنی گۆڕینی لاپەڕەکان
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    // فەنکشنی گشتی بۆ ئاگادارکردنەوە
+    function action(type, nameId, qtyId) {
+        let name = document.getElementById(nameId).value;
+        if(name) {
+            alert("پڕۆسەی (" + type + ") بۆ کاڵای (" + name + ") بەسەرکەوتوویی ئەنجامدرا");
+            document.getElementById(nameId).value = "";
+            showPage('home');
+        } else {
+            alert("تکایە زانیارییەکان پڕ بکەرەوە");
+        }
+    }
+</script>
+
+</body>
+</html>
+<div class="menu-item" onclick="showPage('settingsPage')" style="border-color: #95a5a6;">⚙️ ڕێکخستن</div>
+
+<div id="settingsPage" class="page">
+    <button class="btn-back" onclick="showPage('home')">⬅ گەڕانەوە</button>
+    <div class="card">
+        <h3>ڕێکخستنی ئەپ</h3>
+        
+        <label>ناوی ئەپەکەت بگۆڕە:</label>
+        <input type="text" id="appTitleInput" placeholder="ناوی نوێ بنووسە">
+        
+        <label>ڕەنگی سەرەکی (Primary Color):</label>
+        <input type="color" id="colorPicker" value="#2c3e50">
+        
+        <button style="background: #27ae60;" onclick="applySettings()">جێبەجێکردن و پاشەکەوتکردن</button>
+    </div>
+</div>
+
+<script>
+    // ٣. فەنکشنی جێبەجێکردنی گۆڕانکارییەکان
+    function applySettings() {
+        const newTitle = document.getElementById('appTitleInput').value;
+        const newColor = document.getElementById('colorPicker').value;
+
+        // گۆڕینی ناوی ئەپەکە لە هێدەر
+        if(newTitle) {
+            document.querySelector('header').innerText = newTitle;
+            localStorage.setItem('appTitle', newTitle);
+        }
+
+        // گۆڕینی ڕەنگی سەرەکی
+        document.documentElement.style.setProperty('--primary', newColor);
+        localStorage.setItem('appColor', newColor);
+
+        alert("گۆڕانکارییەکان بە سەرکەوتوویی جێبەجێ کران!");
+    }
+
+    // ٤. بارگاویکردنەوەی ڕێکخستنەکان کاتێک ئەپەکە دەکرێتەوە
+    window.onload = function() {
+        const savedTitle = localStorage.getItem('appTitle');
+        const savedColor = localStorage.getItem('appColor');
+
+        if(savedTitle) {
+            document.querySelector('header').innerText = savedTitle;
+        }
+        if(savedColor) {
+            document.documentElement.style.setProperty('--primary', savedColor);
+            document.getElementById('colorPicker').value = savedColor;
+        }
+    }
+</script>
